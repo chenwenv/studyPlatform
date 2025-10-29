@@ -1,18 +1,20 @@
 // models/User.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/database'); // 确保能访问 sequelize 实例
+
 
 const User = sequelize.define('User', {
-  username: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    unique: true,
-    validate: {
-      notEmpty: true
-    }
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
   email: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
     validate: {
@@ -20,12 +22,12 @@ const User = sequelize.define('User', {
     }
   },
   password: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING,
     allowNull: false
   }
 }, {
-  tableName: 'users', // 指定表名为 users
-  timestamps: true    // 自动管理 createdAt/updatedAt
+  timestamps: true, // 自动添加 createdAt, updatedAt
+  tableName: 'users'
 });
 
 module.exports = User;
