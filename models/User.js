@@ -1,7 +1,6 @@
 // models/User.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // 确保能访问 sequelize 实例
-
+const sequelize = require('../config/database');
 
 const User = sequelize.define('User', {
   id: {
@@ -9,9 +8,10 @@ const User = sequelize.define('User', {
     autoIncrement: true,
     primaryKey: true
   },
-  name: {
+  username: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true // 建议加上唯一性，避免重复用户名
   },
   email: {
     type: DataTypes.STRING,
@@ -26,7 +26,7 @@ const User = sequelize.define('User', {
     allowNull: false
   }
 }, {
-  timestamps: true, // 自动添加 createdAt, updatedAt
+  timestamps: true,
   tableName: 'users'
 });
 
